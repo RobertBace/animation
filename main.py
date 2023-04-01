@@ -3,6 +3,7 @@ import Add2D
 import Add3D
 import Multiply2D
 import LC2D
+import MatrixVector2D
 
 
 class main:
@@ -19,7 +20,7 @@ class main:
     def mainMenu(self):
         self.clear_all()
 
-        n_rows = 4
+        n_rows = 5
         n_columns = 1
         for i in range(n_rows):
             self.root.grid_rowconfigure(i, weight=1)
@@ -43,10 +44,14 @@ class main:
                             command= self.linearCombination2D, bg="chartreuse1", font=12, width=50)
         button3.grid(row=2, pady=5, padx=50)
 
+        button5 = tk.Button(self.root, text="Násobenie vektora maticou [ 2D ]",
+                            command=self.matrixMultiplication2D, bg="chartreuse1", font=12, width=50)
+        button5.grid(row=3, pady=5, padx=50)
+
 
         button2 = tk.Button(self.root, text="Sčítanie 2 vektorov [ 3D ]",
                             command=self.addition3D, bg="chocolate1", font=12, width=50)
-        button2.grid(row=3, pady=(5, 30), padx=50)
+        button2.grid(row=4, pady=(5, 30), padx=50)
 
     def addition2D(self):
         self.clear_all()
@@ -115,7 +120,7 @@ class main:
         labelR1 = tk.Label(self.root, text=") ", font=("Arial", 40), bg="darkgray")
         labelR1.grid(row=0, column=2, rowspan=2, pady=(0, 5))
 
-        label = tk.Label(self.root, text="x ", font=("Arial", 20), bg="darkgray")
+        label = tk.Label(self.root, text="⨉", font=("Arial", 20), bg="darkgray")
         label.grid(row=0, column=3, rowspan=2, pady=(0, 5))
 
         inputC = tk.Entry(self.root, width=2,font=('Arial 24'), justify='center')
@@ -153,7 +158,7 @@ class main:
         labelR1 = tk.Label(self.root, text=")", font=("Arial", 40), bg="darkgray")
         labelR1.grid(row=0, column=2, rowspan=2, pady=(0, 5))
 
-        label1 = tk.Label(self.root, text="x", font=("Arial", 20), bg="darkgray")
+        label1 = tk.Label(self.root, text="⨉", font=("Arial", 20), bg="darkgray")
         label1.grid(row=0, column=3, rowspan=2, pady=(0, 5))
 
         inputC1 = tk.Entry(self.root, width=2, font=('Arial 20'), justify='center')
@@ -171,7 +176,7 @@ class main:
         labelR2 = tk.Label(self.root, text=")", font=("Arial", 40), bg="darkgray")
         labelR2.grid(row=0, column=8, rowspan=2, pady=(0, 5))
 
-        label2 = tk.Label(self.root, text="x", font=("Arial", 20), bg="darkgray")
+        label2 = tk.Label(self.root, text="⨉", font=("Arial", 20), bg="darkgray")
         label2.grid(row=0, column=9, rowspan=2, pady=(0, 5))
 
         inputC2 = tk.Entry(self.root, width=2, font=('Arial 20'), justify='center')
@@ -200,6 +205,53 @@ class main:
 
         mainBut = tk.Button(self.root, text="Menu", command=self.mainMenu, bg="orange", width=30)
         mainBut.grid(row=3, column=0, columnspan=15, pady=(5, 20))
+
+    def matrixMultiplication2D(self):
+        self.clear_all()
+
+        n_rows = 4
+        n_columns = 8
+        for i in range(n_rows):
+            self.root.grid_rowconfigure(i, weight=1)
+        for i in range(n_columns):
+            self.root.grid_columnconfigure(i, weight=1)
+
+        # self.root.geometry("200x190")
+
+        labelL1 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
+        labelL1.grid(row=0, column=0, rowspan=2, pady=(0, 5))
+        inputx1 = tk.Entry(self.root, width=3, justify='center')
+        inputx1.grid(row=0, column=1, padx=(0, 10), pady=(5, 0))
+        inputy1 = tk.Entry(self.root, width=3, justify='center')
+        inputy1.grid(row=1, column=1, padx=(0, 10))
+        inputx2 = tk.Entry(self.root, width=3, justify='center')
+        inputx2.grid(row=0, column=2, pady=(5, 0))
+        inputy2 = tk.Entry(self.root, width=3, justify='center')
+        inputy2.grid(row=1, column=2)
+        labelR1 = tk.Label(self.root, text=") ", font=("Arial", 40), bg="darkgray")
+        labelR1.grid(row=0, column=3, rowspan=2, pady=(0, 5))
+
+        label = tk.Label(self.root, text="⨉", font=("Arial", 20), bg="darkgray")
+        label.grid(row=0, column=4, rowspan=2, pady=(0, 5))
+
+        labelL2 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
+        labelL2.grid(row=0, column=5, rowspan=2, pady=(0, 5))
+        inputVx1 = tk.Entry(self.root, width=3, justify='center')
+        inputVx1.grid(row=0, column=6, pady=(5, 0))
+        inputVy1 = tk.Entry(self.root, width=3, justify='center')
+        inputVy1.grid(row=1, column=6)
+        labelR2 = tk.Label(self.root, text=") ", font=("Arial", 40), bg="darkgray")
+        labelR2.grid(row=0, column=7, rowspan=2, pady=(0, 5))
+
+        # Add the button to the main menu
+        # Create the button
+        button = tk.Button(self.root, text="Launch Plot",
+                           command=lambda: self.launch_plot2DVectorMulti(inputx1, inputy1, inputx2, inputy2, inputVx1, inputVy1),
+                           bg="green", width=15)
+        button.grid(row=2, column=0, columnspan=8, pady=(20, 5))
+
+        mainBut = tk.Button(self.root, text="Menu", command=self.mainMenu, bg="orange", width=15)
+        mainBut.grid(row=3, column=0, columnspan=8, pady=(5, 15))
 
     def addition3D(self):
         self.clear_all()
@@ -257,6 +309,11 @@ class main:
             item.destroy()
 
     def launch_plot2Dadd(self, inputx1, inputy1, inputx2, inputy2, sub):
+        x1 = self.getNumber(inputx1.get())
+        x2 = self.getNumber(inputx2.get())
+        y1 = self.getNumber(inputy1.get())
+        y2 = self.getNumber(inputy2.get())
+
         if (sub == "+"):
             sub = False
             sign = True
@@ -266,49 +323,192 @@ class main:
         else:
             sign = False
             print("Bad choosen sign")
-        try:
-            x1 = float(inputx1.get())
-            y1 = float(inputy1.get())
-            x2 = float(inputx2.get())
-            y2 = float(inputy2.get())
-            correct = True
-        except ValueError:
-            correct = False
-            print("Not a float")
+        correct = True
+        if (not (self.is_number(inputx1))):
+            if (inputx1.get() == ""):
+                x1 = 1
+            else:
+                correct = False
+                print("x1 is not a number")
+
+        if (not (self.is_number(inputy1.get()))):
+            if (inputy1.get() == ""):
+                y1 = 1
+            else:
+                correct = False
+                print("y1 is not a number")
+
+        if (not (self.is_number(inputx2.get()))):
+            if (inputx2.get() == ""):
+                x2 = 1
+            else:
+                correct = False
+                print("x2 is not a number")
+
+        if (not (self.is_number(inputy2.get()))):
+            if (inputy2.get() == ""):
+                y2 = 1
+            else:
+                correct = False
+                print("y2 is not a number")
 
         if(correct and sign):
             Add2D.AditionOfTwoVector2D(x1, y1, x2, y2,sub)
 
     def launch_plot2DMulti(self, inputx1, inputy1, inputC):
-        try:
-            x1 = float(inputx1.get())
-            y1 = float(inputy1.get())
-            c = float(inputC.get())
-            correct = True
-        except ValueError:
-            correct = False
-            print("Not a float")
+        x1 = self.getNumber(inputx1.get())
+        y1 = self.getNumber(inputy1.get())
+        c = self.getNumber(inputC.get())
+
+        correct = True
+        if (not (self.is_number(inputx1.get()))):
+            if (inputx1.get() == ""):
+                x1 = 1
+            else:
+                correct = False
+                print("x1 is not a number")
+
+        if (not (self.is_number(inputy1.get()))):
+            if (inputy1.get() == ""):
+                y1 = 1
+            else:
+                correct = False
+                print("y1 is not a number")
+
+        if (not (self.is_number(inputC.get()))):
+            if (inputC.get() == ""):
+                c = 1
+            else:
+                correct = False
+                print("c1 is not a number")
 
         if(correct):
             Multiply2D.MultiplicationOfTwoVector2D(x1, y1, c)
 
     def launch_plot2DLC(self, inputx1, inputy1, inputC1, inputx2, inputy2, inputC2, resx, resy):
-        try:
-            x1 = float(inputx1.get())
-            y1 = float(inputy1.get())
-            c1 = float(inputC1.get())
-            x2 = float(inputx2.get())
-            y2 = float(inputy2.get())
-            c2 = float(inputC2.get())
-            resX = float(resx.get())
-            resY = float(resy.get())
-            correct = True
-        except ValueError:
-            correct = False
-            print("Not a float")
+        x1 = self.getNumber(inputx1.get())
+        x2 = self.getNumber(inputx2.get())
+        y1 = self.getNumber(inputy1.get())
+        y2 = self.getNumber(inputy2.get())
+        c1 = self.getNumber(inputC1.get())
+        c2 = self.getNumber(inputC2.get())
+        resX = self.getNumber(resx.get())
+        resY = self.getNumber(resy.get())
+
+        correct = True
+        if (not (self.is_number(inputx1.get()))):
+            if(inputx1.get() == ""):
+                x1 = 1
+            else:
+                correct = False
+                print("x1 is not a number")
+
+        if (not (self.is_number(inputy1.get()))):
+            if (inputy1.get() == ""):
+                y1 = 1
+            else:
+                correct = False
+                print("y1 is not a number")
+
+        if (not (self.is_number(inputC1.get()))):
+            if (inputC1.get() == ""):
+                c1 = 1
+            else:
+                correct = False
+                print("c1 is not a number")
+
+        if (not (self.is_number(inputx2.get()))):
+            if (inputx2.get() == ""):
+                x2 = 1
+            else:
+                correct = False
+                print("x2 is not a number")
+
+        if (not (self.is_number(inputy2.get()))):
+            if (inputy2.get() == ""):
+                y2 = 1
+            else:
+                correct = False
+                print("y2 is not a number")
+
+        if (not (self.is_number(inputC2.get()))):
+            if (inputC2.get() == ""):
+                c2 = 1
+            else:
+                correct = False
+                print("c2 is not a number")
+
+        if (not (self.is_number(resx.get()))):
+            if (resx.get() == ""):
+                resX = x1 + x2
+            else:
+                correct = False
+                print("resultX is not a number")
+
+        if (not (self.is_number(resy.get()))):
+            if (resy.get() == ""):
+                resY = y1 + y2
+            else:
+                correct = False
+                print("result Y is not a number")
 
         if(correct):
             LC2D.LinearCombination2D(x1,y1,c1,x2,y2,c2,resX,resY)
+
+    def launch_plot2DVectorMulti(self, inputx1, inputx2, inputy1, inputy2, inputC1, inputC2):
+        x1 = self.getNumber(inputx1.get())
+        x2 = self.getNumber(inputx2.get())
+        y1 = self.getNumber(inputy1.get())
+        y2 = self.getNumber(inputy2.get())
+        vecX = self.getNumber(inputC1.get())
+        vecY = self.getNumber(inputC2.get())
+
+        correct = True
+        if (not (self.is_number(inputx1.get()))):
+            if (inputx1.get() == ""):
+                x1 = 1
+            else:
+                correct = False
+                print("x1 is not a number")
+
+        if (not(self.is_number(inputy1.get()))):
+            if (inputy1.get() == ""):
+                y1 = 1
+            else:
+                correct = False
+                print("y1 is not a number")
+
+        if (not (self.is_number(inputC1.get()))):
+            if (inputC1.get() == ""):
+                vecX = 1
+            else:
+                correct = False
+                print("c1 is not a number")
+
+        if (not (self.is_number(inputx2.get()))):
+            if (inputx2.get() == ""):
+                x2 = 1
+            else:
+                correct = False
+                print("x2 is not a number")
+
+        if (not (self.is_number(inputy2.get()))):
+            if (inputy2.get() == ""):
+                y2 = 1
+            else:
+                correct = False
+                print("y2 is not a number")
+
+        if (not (self.is_number(inputC2.get()))):
+            if (inputC2.get() == ""):
+                vecY = 1
+            else:
+                correct = False
+                print("c2 is not a number")
+
+
+        if (correct):
+            MatrixVector2D.MultiplicationVectorByMatrix2D(x1, y1, x2, y2, vecX, vecY)
 
     def launch_plot3Dadd(self, inputx1, inputy1, inputz1, inputx2, inputy2, inputz2):
         try:
@@ -323,13 +523,26 @@ class main:
 
         Add3D.AditionOfTwoVector3D(x1, y1, x2, y2, z1, z2)
 
-menu = main()
+    def is_number(self, num):
+        num = num.replace("-", "")
+        num = num.replace(".", "")
+        num = num.replace(",", "")
 
-#pridať label s vektormi ------------------------------------------> DONE
-#nie cyklus ale zastaviť a na stlačenie klavesy spustiť -----------> DONE
-#spustit ----------------------------------------------------------> DONE
-# tmave pozadie ---------------------------------------------------> DONE
-# po animacii vysledok --------------------------------------------> DONE
-# (linearna kombinacia) -------------------------------------------> DONE
-# 3 vektory c.() + cx() = vec -------------------------------------> DONE
-# refactoring substraction, multiplication ------------------------> DONE
+        if (num.isdigit()):
+            return True
+        else:
+            return False
+
+    def getNumber(self, num):
+        num = num.replace(",", ".")
+        if(self.is_number(num) and (num != "" and num != None)):
+            if("." in num):
+                return float(num)
+            else:
+                return int(num)
+        else:
+            return 1
+
+
+
+menu = main()

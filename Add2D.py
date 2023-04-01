@@ -63,9 +63,34 @@ class AditionOfTwoVector2D:
         self.ax.spines['right'].set_color('none')
         self.ax.spines['top'].set_color('none')
 
+        fsxMax = (max(arrayX) + 2) - (min(arrayX) - 1)
+        fsyMax = (max(arrayY) + 2) - (min(arrayY) - 1)
+
+        if (fsxMax > 100):
+            fsx = 4
+        elif (fsxMax > 75):
+            fsx = 6
+        elif (fsxMax > 50):
+            fsx = 8
+        elif (fsxMax > 25):
+            fsx = 10
+        else:
+            fsx = 12
+
+        if (fsyMax > 100):
+            fsy = 4
+        elif (fsyMax > 75):
+            fsy = 6
+        elif (fsyMax > 50):
+            fsy = 8
+        elif (fsyMax > 25):
+            fsy = 10
+        else:
+            fsy = 12
+
         # set numbers color
-        self.ax.tick_params(axis='x', colors='yellow', size=8, labelsize=14)
-        self.ax.tick_params(axis='y', colors='yellow', size=8, labelsize=14)
+        self.ax.tick_params(axis='x', colors='yellow', size=8, labelsize=fsx)
+        self.ax.tick_params(axis='y', colors='yellow', size=8, labelsize=fsy)
 
         # Define a flag to indicate if the animation is paused
         self.pause = False
@@ -89,17 +114,17 @@ class AditionOfTwoVector2D:
         else:
             sign = ' + '
 
-        self.label = r'$\genfrac{(}{)}{0}{3}{\mathtt{\,'+str(x1)+'}}{\mathtt{\,'+str(y1)+'}}'+sign+'' \
-                 '\genfrac{(}{)}{0}{3}{\mathtt{\,'+str(x2)+'}}{\mathtt{\,'+str(y2)+'}} =}}$'
+        self.label = r'$\genfrac{(}{)}{0}{1}{\mathtt{\,'+str(x1)+'}}{\mathtt{\,'+str(y1)+'}}'+sign+'' \
+                 '\genfrac{(}{)}{0}{1}{\mathtt{\,'+str(x2)+'}}{\mathtt{\,'+str(y2)+'}} =}}$'
 
         if(sub):
             self.labelFinal = r'$\genfrac{(}{)}{0}{3}{\mathtt{\,'+str(x1)+'}}{\mathtt{\,'+str(y1)+'}}'+sign+'' \
-                          '\genfrac{(}{)}{0}{3}{\mathtt{\,' + str(x2) + '}}{\mathtt{\,' + str(y2) + '}} = ' \
-                          '\genfrac{(}{)}{0}{3}{\mathtt{\,' + str(x1 - x2) + '}}{\mathtt{\,' + str(y1 - y2) + '}}$'
+                          '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x2) + '}}{\mathtt{\,' + str(y2) + '}} = ' \
+                          '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x1 - x2) + '}}{\mathtt{\,' + str(y1 - y2) + '}}$'
         else:
-            self.labelFinal = r'$\genfrac{(}{)}{0}{3}{\mathtt{\,' + str(x1) + '}}{\mathtt{\,' + str(y1) + '}}' + sign + '' \
-                                '\genfrac{(}{)}{0}{3}{\mathtt{\,' + str(x2) + '}}{\mathtt{\,' + str(y2) + '}} = ' \
-                                '\genfrac{(}{)}{0}{3}{\mathtt{\,' + str(x1 - x2) + '}}{\mathtt{\,' + str(y1 - y2) + '}}$'
+            self.labelFinal = r'$\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x1) + '}}{\mathtt{\,' + str(y1) + '}}' + sign + '' \
+                                '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x2) + '}}{\mathtt{\,' + str(y2) + '}} = ' \
+                                '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x1 - x2) + '}}{\mathtt{\,' + str(y1 - y2) + '}}$'
 
 
         self.ax.set_title(label=self.label, color='yellow', pad=30, fontsize=40)
