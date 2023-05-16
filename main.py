@@ -1,9 +1,10 @@
 import tkinter as tk
 import Add2D
 import Add3D
+import MatrixVector2DFull
 import Multiply2D
 import LC2D
-import MatrixVector2D
+import MatrixVector2DFull
 
 
 class main:
@@ -246,7 +247,7 @@ class main:
         # Add the button to the main menu
         # Create the button
         button = tk.Button(self.root, text="Launch Plot",
-                           command=lambda: self.launch_plot2DVectorMulti(inputx1, inputy1, inputx2, inputy2, inputVx1, inputVy1),
+                           command=lambda: self.launch_plot2DVectorMulti(inputx1, inputx2, inputy1, inputy2, inputVx1, inputVy1),
                            bg="green", width=15)
         button.grid(row=2, column=0, columnspan=8, pady=(20, 5))
 
@@ -324,7 +325,7 @@ class main:
             sign = False
             print("Bad choosen sign")
         correct = True
-        if (not (self.is_number(inputx1))):
+        if (not (self.is_number(inputx1.get()))):
             if (inputx1.get() == ""):
                 x1 = 1
             else:
@@ -508,7 +509,7 @@ class main:
 
 
         if (correct):
-            MatrixVector2D.MultiplicationVectorByMatrix2D(x1, y1, x2, y2, vecX, vecY)
+            MatrixVector2DFull.MultiplicationVectorByMatrix2D(x1, y1, x2, y2, vecX, vecY)
 
     def launch_plot3Dadd(self, inputx1, inputy1, inputz1, inputx2, inputy2, inputz2):
         try:

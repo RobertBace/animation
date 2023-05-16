@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import time
 
 import matplotlib
 
@@ -106,7 +105,7 @@ class MultiplicationOfTwoVector2D:
         plt.subplots_adjust(top=0.8)
 
         #equalize the scales of the x-axis and y-axis
-        self.ax.set_aspect('equal', adjustable='box')
+        #self.ax.set_aspect('equal', adjustable='box')
 
         # Display the animation
         plt.show(block=True)
@@ -160,4 +159,4 @@ class MultiplicationOfTwoVector2D:
             else:
                 self.ani.event_source.start()
 
-MultiplicationOfTwoVector2D(2, 2, 1)
+#MultiplicationOfTwoVector2D(2, 2, 1)

@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from matplotlib.pyplot import yticks, get_current_fig_manager, xticks, subplots_adjust, show, subplots
 import matplotlib.animation as animation
 import time
 
@@ -13,9 +13,9 @@ class AditionOfTwoVector2D:
         self.vec2 = np.array([x2, y2])
 
         # Create the figure and axis
-        self.fig, self.ax = plt.subplots()
+        self.fig, self.ax = subplots()
 
-        manager = plt.get_current_fig_manager()
+        manager = get_current_fig_manager()
         manager.window.state('zoomed')
 
         # Set dark background
@@ -46,13 +46,13 @@ class AditionOfTwoVector2D:
         if(sub):
             arrayX = [self.vec1[0], self.vec2[0], self.vec1[0] + self.vec2[0], self.vec1[0] - self.vec2[0], 0]
             arrayY = [self.vec1[1], self.vec2[1], self.vec1[1] + self.vec2[1], self.vec1[1] - self.vec2[1], 0]
-            plt.xticks(np.arange(min(arrayX) - 1, max(arrayX) + 2, 1))
-            plt.yticks(np.arange(min(arrayY) - 1, max(arrayY) + 2, 1))
+            xticks(np.arange(min(arrayX) - 1, max(arrayX) + 2, 1))
+            yticks(np.arange(min(arrayY) - 1, max(arrayY) + 2, 1))
         else:
             arrayX = [self.vec1[0], self.vec2[0], self.vec1[0] + self.vec2[0],0]
             arrayY = [self.vec1[1], self.vec2[1], self.vec1[1] + self.vec2[1],0]
-            plt.xticks(np.arange(min(arrayX)-1, max(arrayX)+2, 1))
-            plt.yticks(np.arange(min(arrayY)-1, max(arrayY)+2, 1))
+            xticks(np.arange(min(arrayX) - 1, max(arrayX) + 2, 1))
+            yticks(np.arange(min(arrayY) - 1, max(arrayY) + 2, 1))
 
         self.ax.spines['left'].set_position(('data', 0.0))
         self.ax.spines['bottom'].set_position(('data', 0.0))
@@ -130,11 +130,11 @@ class AditionOfTwoVector2D:
         self.ax.set_title(label=self.label, color='yellow', pad=30, fontsize=40)
 
         # equalize the scales of the x-axis and y-axis
-        self.ax.set_aspect('equal', adjustable='box')
+        #self.ax.set_aspect('equal', adjustable='box')
 
-        plt.subplots_adjust(top=0.8)
+        subplots_adjust(top=0.8)
 
-        plt.show(block=True)
+        show(block=True)
 
     # Define the update function for the animation
     def updateAdd(self, frame):

@@ -122,7 +122,7 @@ class LinearCombination2D:
         plt.subplots_adjust(top=0.8)
 
         # equalize the scales of the x-axis and y-axis
-        self.ax.set_aspect('equal', adjustable='box')
+        #self.ax.set_aspect('equal', adjustable='box')
 
         plt.show(block=True)
 
