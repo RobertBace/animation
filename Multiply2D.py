@@ -87,8 +87,6 @@ class MultiplicationOfTwoVector2D:
         # Define a variable to store the animation object
         self.ani = None
 
-        # Create the animation
-
         self.ani = animation.FuncAnimation(self.fig, self.update, frames=102, interval=5)
 
         # Connect the mouse button click event to the onClick function
@@ -109,8 +107,6 @@ class MultiplicationOfTwoVector2D:
 
         # Display the animation
         plt.show(block=True)
-
-
 
     def update(self, frame):
         if (frame >= 1):

@@ -1,7 +1,6 @@
 import tkinter as tk
 import Add2D
 import Add3D
-import MatrixVector2DFull
 import Multiply2D
 import LC2D
 import MatrixVector2DFull
@@ -28,13 +27,9 @@ class main:
         for i in range(n_columns):
             self.root.grid_columnconfigure(i, weight=1)
 
-        #self.root.geometry("500x500")
-
         button1 = tk.Button(self.root, text="Sčítanie / Odčítanie 2 vektorov [ 2D ]",
                            command= self.addition2D, bg="chartreuse1", font=12, width=50)
         button1.grid(row=0, pady=(30, 5), padx=50)
-
-
 
         button4 = tk.Button(self.root, text="Násobenie vektora [ 2D ]",
                             command= self.multiplication2D, bg="chartreuse1", font=12, width=50)
@@ -64,8 +59,6 @@ class main:
         for i in range(n_columns):
                 self.root.grid_columnconfigure(i, weight=1)
 
-        #self.root.geometry("200x190")
-
         labelL1 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
         labelL1.grid(row=0, column=0, rowspan=2, pady=(0, 5))
         inputx1 = tk.Entry(self.root, width= 3, justify='center')
@@ -87,10 +80,6 @@ class main:
         labelR2 = tk.Label(self.root, text=") ", font=("Arial", 40), bg="darkgray")
         labelR2.grid(row=0, column=6, rowspan=2, pady=(0, 5))
 
-
-        # Add the button to the main menu
-        # Create the button
-
         button = tk.Button(self.root, text="Launch Plot",
                            command= lambda: self.launch_plot2Dadd(inputx1, inputy1, inputx2, inputy2, input.get()),
                            bg="green", width=20)
@@ -110,8 +99,6 @@ class main:
         for i in range(n_columns):
                 self.root.grid_columnconfigure(i, weight=1)
 
-        #self.root.geometry("200x190")
-
         labelL1 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
         labelL1.grid(row=0, column=0, rowspan=2, pady=(0, 5))
         inputx1 = tk.Entry(self.root, width=3, justify='center')
@@ -127,9 +114,6 @@ class main:
         inputC = tk.Entry(self.root, width=2,font=('Arial 24'), justify='center')
         inputC.grid(row=0, column=4, rowspan=2 , padx=(0,10))
 
-
-        # Add the button to the main menu
-        # Create the button
         button = tk.Button(self.root, text="Launch Plot",
                            command= lambda: self.launch_plot2DMulti(inputx1, inputy1, inputC),
                            bg="green", width=15)
@@ -147,8 +131,6 @@ class main:
             self.root.grid_rowconfigure(i, weight=1)
         for i in range(n_columns):
             self.root.grid_columnconfigure(i, weight=1)
-
-        # self.root.geometry("200x190")
 
         labelL1 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
         labelL1.grid(row=0, column=0, rowspan=2, pady=(0, 5))
@@ -195,9 +177,6 @@ class main:
         labelR3 = tk.Label(self.root, text=")", font=("Arial", 40), bg="darkgray")
         labelR3.grid(row=0, column=14, rowspan=2, pady=(0, 5))
 
-        # Add the button to the main menu
-        # Create the button
-
         button = tk.Button(self.root, text="Launch Plot",
                            command=lambda: self.launch_plot2DLC(inputx1, inputy1, inputC1, inputx2, inputy2, inputC2,
                                                                 resx, resy),
@@ -209,15 +188,12 @@ class main:
 
     def matrixMultiplication2D(self):
         self.clear_all()
-
         n_rows = 4
         n_columns = 8
         for i in range(n_rows):
             self.root.grid_rowconfigure(i, weight=1)
         for i in range(n_columns):
             self.root.grid_columnconfigure(i, weight=1)
-
-        # self.root.geometry("200x190")
 
         labelL1 = tk.Label(self.root, text=" (", font=("Arial", 40), bg="darkgray")
         labelL1.grid(row=0, column=0, rowspan=2, pady=(0, 5))
@@ -244,8 +220,6 @@ class main:
         labelR2 = tk.Label(self.root, text=") ", font=("Arial", 40), bg="darkgray")
         labelR2.grid(row=0, column=7, rowspan=2, pady=(0, 5))
 
-        # Add the button to the main menu
-        # Create the button
         button = tk.Button(self.root, text="Launch Plot",
                            command=lambda: self.launch_plot2DVectorMulti(inputx1, inputx2, inputy1, inputy2, inputVx1, inputVy1),
                            bg="green", width=15)
@@ -294,7 +268,6 @@ class main:
         inputz2 = tk.Entry(self.root, width=5, justify='center')
         inputz2.grid(row=1, column=5, padx=(0, 10))
 
-
         button = tk.Button(self.root, text="Launch Plot",
                            command= lambda: self.launch_plot3Dadd(inputx1, inputy1, inputz1, inputx2, inputy2, inputz2),
                            bg="green", width=10)
@@ -302,8 +275,6 @@ class main:
 
         mainBut = tk.Button(self.root, text="Menu", command=self.mainMenu, bg="orange", width=10)
         mainBut.grid(row=3, column=0, columnspan=7, pady=(5, 20))
-
-
 
     def clear_all(self):
         for item in self.root.winfo_children():
@@ -506,8 +477,6 @@ class main:
             else:
                 correct = False
                 print("c2 is not a number")
-
-
         if (correct):
             MatrixVector2DFull.MultiplicationVectorByMatrix2D(x1, y1, x2, y2, vecX, vecY)
 
@@ -543,7 +512,5 @@ class main:
                 return int(num)
         else:
             return 1
-
-
 
 menu = main()

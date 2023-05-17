@@ -10,6 +10,7 @@ import matplotlib
 matplotlib.use('TkAgg')
 
 class MultiplicationVectorByMatrix2D:
+
     def __init__(self, x1, y1, x2, y2, vectorX, vectorY):
         self.vec1 = np.array([vectorX, vectorY])
         self.matrix = [[x1, y1], [x2, y2]]
@@ -17,8 +18,8 @@ class MultiplicationVectorByMatrix2D:
         # Create the figure and axis
         self.fig, self.ax = plt.subplots()
 
-        manager = plt.get_current_fig_manager()
-        manager.window.state('zoomed')
+        self.manager = plt.get_current_fig_manager()
+        self.manager.window.state('zoomed')
 
 
         # Set dark background
@@ -28,8 +29,6 @@ class MultiplicationVectorByMatrix2D:
         # Define the scatter plot for the vectors
 
         self.q1 = self.ax.scatter(vectorX, vectorY, color='red')
-
-
         self.q3 = self.ax.quiver(0, 0, self.matrix[0][0], self.matrix[0][1], angles='xy', scale_units='xy', scale=1, color='green')
         self.q4 = self.ax.quiver(0, 0, self.matrix[1][0], self.matrix[1][1], angles='xy', scale_units='xy', scale=1, color='blue')
 
@@ -46,19 +45,8 @@ class MultiplicationVectorByMatrix2D:
         self.lineX[0].set_visible(False)
         self.lineY[0].set_visible(False)
 
-
-
         arrayX = [self.vec1[0], x1, x2, self.x, 0,self.vec1[0]* x1,self.vec1[1]* x2]
         arrayY = [self.vec1[1], y1, y2, self.y, 0,self.vec1[0]* y1,self.vec1[1]* y2]
-
-        # lin = self.axis(min(arrayX) - 1, max(arrayX) + 2, min(arrayY) - 1, max(arrayY) + 2, x1, y1)
-        # self.matrix1 = self.ax.plot(lin[0], lin[1], 'b-', linewidth=1)
-        # lin = self.axis(min(arrayX) - 1, max(arrayX) + 2, min(arrayY) - 1, max(arrayY) + 2, x2, y2)
-        # self.matrix1 = self.ax.plot(lin[0], lin[1], 'b-', linewidth=1)
-        # lin = self.axisLines1(self.x, self.y, x1,y1,x2,y2)
-        # self.asmatrixX = self.ax.plot([self.x,lin[0]], [self.y,lin[1]], 'b:', linewidth=1)
-        # lin = self.axisLines2(self.x, self.y, x1, y1, x2, y2)
-        # self.asmatrixX = self.ax.plot([self.x, lin[0]], [self.y, lin[1]], 'b:', linewidth=1)
 
         lin = self.axis(min(arrayX) - 1, max(arrayX) + 2, min(arrayY) - 1, max(arrayY) + 2, x1, y1)
         self.ax.plot(lin[0], lin[1],"w-", linewidth=1)
@@ -137,37 +125,48 @@ class MultiplicationVectorByMatrix2D:
         #equalize the scales of the x-axis and y-axis
         #self.ax.set_aspect('equal', adjustable='box')
         plt.pause(0.0001)
-        w, h = manager.canvas.get_width_height()
-        w = (w * self.ax.get_position().width) / (fsxMax)
-        h = (h * self.ax.get_position().height) / (fsyMax)
-        alfa = math.atan((y1*h) / (x1*w)) * 180 / math.pi
-        for i in range (min(arrayX) - 1 - self.mod(min(arrayX) - 1,abs(x1)), max(arrayX) + 2,x1):
-            if (i != 0):
-                angle =  math.atan(y1/x1)*180/math.pi
-                self.ax.plot([i,i+math.cos(math.radians(alfa-90))/w*10], [i*(y1/x1), i*(y1/x1)+math.sin(math.radians(alfa-90))/h*10], 'w-', linewidth=1)
-
-                anotX = i+math.cos(math.radians(alfa-90))/w*30
-                anotY = i*(y1/x1)+math.sin(math.radians(alfa-90))/h*30
-                self.ax.annotate(str(i), xy=(anotX, anotY),
-                                 xytext=(anotX, anotY), color='white', fontsize=14, rotation= alfa, ha='center', va='center')
-
-        w, h = manager.canvas.get_width_height()
-        w = (w * self.ax.get_position().width) / (fsxMax)
-        h = (h * self.ax.get_position().height) / (fsyMax)
-        alfa = math.atan((y2*h) / (x2*w)) * 180 / math.pi
-        for i in range (min(arrayX) - 1- self.mod(min(arrayX) - 1,abs(x2)), max(arrayX) + 2,x2):
-            if (i != 0):
-                angle =  math.atan(y2/x2)*180/math.pi
-                self.ax.plot([i,i+math.cos(math.radians(alfa-90))/w*10], [i*(y2/x2), i*(y2/x2)+math.sin(math.radians(alfa-90))/h*10], 'w-', linewidth=1)
-
-                anotX = i + math.cos(math.radians(alfa - 90)) / w * 30
-                anotY = i * (y2 / x2) + math.sin(math.radians(alfa - 90)) / h * 30
-                self.ax.annotate(str(i), xy=(anotX, anotY),
-                                 xytext=(anotX, anotY), color='white', fontsize=14, rotation=alfa, ha='center', va='center')
-
+        self.drawAxis(fsxMax, fsyMax, arrayX)
+        
         plt.show(block=False)
 
+    def drawAxis(self, fsxMax, fsyMax, arrayX):
+        w, h = self.manager.canvas.get_width_height()
+        w = (w * self.ax.get_position().width) / (fsxMax)
+        h = (h * self.ax.get_position().height) / (fsyMax)
+        alfa = math.atan((self.matrix[0][1] * h) / (self.matrix[0][0] * w)) * 180 / math.pi
+        for i in range(min(arrayX) - 1 - self.mod(min(arrayX) - 1, abs(self.matrix[0][0])), max(arrayX) + 2,
+                       self.matrix[0][0]):
+            if (i != 0):
+                angle = math.atan(self.matrix[0][1] / self.matrix[0][0]) * 180 / math.pi
+                self.ax.plot([i, i + math.cos(math.radians(alfa - 90)) / w * 10],
+                             [i * (self.matrix[0][1] / self.matrix[0][0]),
+                              i * (self.matrix[0][1] / self.matrix[0][0]) + math.sin(math.radians(alfa - 90)) / h * 10],
+                             'w-', linewidth=1)
 
+                anotX = i + math.cos(math.radians(alfa - 90)) / w * 30
+                anotY = i * (self.matrix[0][1] / self.matrix[0][0]) + math.sin(math.radians(alfa - 90)) / h * 30
+                self.ax.annotate(str(i), xy=(anotX, anotY),
+                                 xytext=(anotX, anotY), color='white', fontsize=14, rotation=alfa, ha='center',
+                                 va='center')
+
+        w, h = self.manager.canvas.get_width_height()
+        w = (w * self.ax.get_position().width) / (fsxMax)
+        h = (h * self.ax.get_position().height) / (fsyMax)
+        alfa = math.atan((self.matrix[1][1] * h) / (self.matrix[1][0] * w)) * 180 / math.pi
+        for i in range(min(arrayX) - 1 - self.mod(min(arrayX) - 1, abs(self.matrix[1][0])), max(arrayX) + 2,
+                       self.matrix[1][0]):
+            if (i != 0):
+                angle = math.atan(self.matrix[1][1] / self.matrix[1][0]) * 180 / math.pi
+                self.ax.plot([i, i + math.cos(math.radians(alfa - 90)) / w * 10],
+                             [i * (self.matrix[1][1] / self.matrix[1][0]),
+                              i * (self.matrix[1][1] / self.matrix[1][0]) + math.sin(math.radians(alfa - 90)) / h * 10],
+                             'w-', linewidth=1)
+
+                anotX = i + math.cos(math.radians(alfa - 90)) / w * 30
+                anotY = i * (self.matrix[1][1] / self.matrix[1][0]) + math.sin(math.radians(alfa - 90)) / h * 30
+                self.ax.annotate(str(i), xy=(anotX, anotY),
+                                 xytext=(anotX, anotY), color='white', fontsize=14, rotation=alfa, ha='center',
+                                 va='center')
 
     def update(self, frame):
         if (frame >= 1):
@@ -271,26 +270,4 @@ class MultiplicationVectorByMatrix2D:
         else:
             return result
 
-    # def axisLines1(self, x, y, bx1, by1, bx2, by2):
-    #     a = by1/bx1
-    #     posun = abs(a*x - y)
-    #     if(a*x > y):
-    #         posun = posun*(-1)
-    #     #rovnica1: y = ax + posun
-    #     #rovnica2: y = by2/bx2*x
-    #     vysX = -posun/(a-by2/bx2)
-    #     return [vysX, a*vysX + posun]#a*vysX + posun
-    #
-    # def axisLines2(self, x, y, bx1, by1, bx2, by2):
-    #     a = by2/bx2
-    #     posun = abs(a*x - y)
-    #     if(a*x > y):
-    #         posun = posun*(-1)
-    #     #rovnica1: y = ax + posun
-    #     #rovnica2: y = by2/bx2*x
-    #     vysX = -posun/(a-by1/bx1)
-    #     return [vysX, a*vysX + posun]#a*vysX + posun
 
-
-
-#MultiplicationVectorByMatrix2D(1, 2, 1, 1, 2, 3)

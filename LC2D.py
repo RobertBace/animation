@@ -94,15 +94,10 @@ class LinearCombination2D:
 
         # Define a variable to store the animation object
         self.ani = None
-
-        # Create the animation
-
         self.ani = animation.FuncAnimation(self.fig, self.update, frames=202, interval=1, blit=True) # frames - 102 (0-100)[101] + 1 (vykreslovanie)
 
         # Connect the mouse button click event to the onClick function
         self.fig.canvas.mpl_connect('key_press_event', self.onClick)
-
-        # Display the animation
 
         self.label = r'$\genfrac{(}{)}{0}{1}{\mathtt{\,'+str(x1)+'}}{\mathtt{\,'+str(y1)+'}}\;\cdot\;' + str(c1) + '\;+\;' \
                  '\genfrac{(}{)}{0}{1}{\mathtt{\,'+str(x2)+'}}{\mathtt{\,'+str(y2)+'}}\;\cdot\;' + str(c2) + '\;=\;''}}$'
@@ -118,17 +113,11 @@ class LinearCombination2D:
 
 
         self.ax.set_title(label=self.label, color='yellow', pad=30, fontsize=40)
-
         plt.subplots_adjust(top=0.8)
-
-        # equalize the scales of the x-axis and y-axis
-        #self.ax.set_aspect('equal', adjustable='box')
-
         plt.show(block=True)
 
     # Define the update function for the animation
     def update(self, frame):
-
         if(frame >= 1):
             myFrame = frame - 1
         else:
@@ -154,7 +143,6 @@ class LinearCombination2D:
                 t = [((self.const1 - 1) * (myFrame) / 100.0) * i for i in self.vec1]
                 t = t + self.vec1
                 self.q1.set_UVC(t[0], t[1])
-
                 t = [((self.const2 - 1) * (myFrame) / 100.0) * i for i in self.vec2]
                 t = t + self.vec2
                 self.q2.set_UVC(t[0], t[1])
@@ -169,14 +157,10 @@ class LinearCombination2D:
                     self.lineYR[0].set_visible(True)
                     if (self.ani):
                         self.ax.set_title(label=self.labelFinal, color='yellow', pad=30, fontsize=40)
-
         self.fig.canvas.draw()
 
         return self.q1, self.q2, self.q3, self.lineX[0], self.lineY[0], self.lineXR[0], self.lineYR[0]
 
-
-
-    # Define a function to pause the animation when the mouse button is clicked
     def onClick(self, event):
         if event.key == ' ':
             #global self.pause

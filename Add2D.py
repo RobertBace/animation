@@ -107,8 +107,6 @@ class AditionOfTwoVector2D:
         # Connect the mouse button click event to the onClick function
         self.fig.canvas.mpl_connect('key_press_event', self.onClick)
 
-        # Display the animation
-
         if(sub):
             sign = ' - '
         else:
@@ -126,17 +124,10 @@ class AditionOfTwoVector2D:
                                 '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x2) + '}}{\mathtt{\,' + str(y2) + '}} = ' \
                                 '\genfrac{(}{)}{0}{1}{\mathtt{\,' + str(x1 - x2) + '}}{\mathtt{\,' + str(y1 - y2) + '}}$'
 
-
         self.ax.set_title(label=self.label, color='yellow', pad=30, fontsize=40)
-
-        # equalize the scales of the x-axis and y-axis
-        #self.ax.set_aspect('equal', adjustable='box')
-
         subplots_adjust(top=0.8)
-
         show(block=True)
 
-    # Define the update function for the animation
     def updateAdd(self, frame):
         if(frame >= 1):
             myFrame = frame - 1
@@ -144,7 +135,6 @@ class AditionOfTwoVector2D:
             myFrame = -1
 
         if (self.ani):
-            #self.ani.event_source.stop()
             if (myFrame == 0 or myFrame == 100):
                 self.pause = True
                 self.ani.event_source.stop()
@@ -166,10 +156,6 @@ class AditionOfTwoVector2D:
                 if (self.ani):
                     self.ax.set_title(label=self.label, color='yellow', pad=30, fontsize=40)
                 self.fig.canvas.draw()
-
-            # Redraw the plot
-            #self.fig.canvas.draw()
-
         return self.q1, self.q2, self.q3, self.lineX[0], self.lineY[0]
 
     def updateSub(self, frame):
@@ -179,12 +165,9 @@ class AditionOfTwoVector2D:
             myFrame = -1
 
         if (self.ani):
-            # self.ani.event_source.stop()
             if (myFrame == 0 or myFrame == 201):
                 self.pause = True
                 self.ani.event_source.stop()
-
-
 
         if(myFrame == 0):
             self.q2.set_UVC(self.vec2[0], self.vec2[1])
@@ -214,18 +197,13 @@ class AditionOfTwoVector2D:
                 self.ax.set_title(label=self.labelFinal, color='yellow', pad=30, fontsize=40)
             self.fig.canvas.draw()
 
-
-            #plt.show()
         return self.q1, self.q2, self.q3, self.q4, self.lineX[0], self.lineY[0]
 
     # Define a function to pause the animation when the mouse button is clicked
     def onClick(self, event):
         if event.key == ' ':
-            #global self.pause
             self.pause ^= True
             if self.pause:
                 self.ani.event_source.stop()
             else:
                 self.ani.event_source.start()
-
-#AditionOfTwoVector2D(1,3,3,1,0)
